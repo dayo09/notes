@@ -1,5 +1,6 @@
 name: Deploy Concept Loop
 
+# Deploy on every update to the main branch, or run manually.
 on:
   push:
     branches:
