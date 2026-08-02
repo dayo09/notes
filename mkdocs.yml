@@ -1,0 +1,93 @@
+site_name: Concept Loop
+site_description: 질문하며 쌓아가는 AI 복습노트
+site_url: https://dayo09.github.io/notes/
+repo_url: https://github.com/dayo09/notes
+repo_name: dayo09/notes
+
+theme:
+  name: material
+  language: ko
+  font: false
+  icon:
+    logo: material/creation-outline
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.svg
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tooltips
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: concept-light
+      toggle:
+        icon: material/weather-night
+        name: 어두운 화면으로 전환
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: 밝은 화면으로 전환
+
+nav:
+  - 홈: index.md
+  - Dialogue System:
+      - Task-Oriented Dialogue: dialogue/task-oriented-dialogue.md
+  - 이 노트의 사용법:
+      - 질문하고 업데이트하기: meta/how-to-study.md
+      - 문서 작성 규칙: meta/authoring-guide.md
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/dayo09/notes
+      name: Concept Loop GitHub 저장소
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11.4.1/dist/mermaid.min.js
+  - javascripts/mermaid.js
+  - javascripts/ask-gipi.js
+
+copyright: 질문 → 이해 → 정리 → 다시 질문
