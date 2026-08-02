@@ -5,7 +5,9 @@
   const validSessionUrl = (value) => {
     try {
       const url = new URL(value);
-      return url.protocol === "https:" && VALID_HOSTS.has(url.hostname) && /\/(c|g)\//.test(url.pathname);
+      const isChat = /\/(c|g)\//.test(url.pathname);
+      const isCodexTask = /\/codex\/tasks\//.test(url.pathname);
+      return url.protocol === "https:" && VALID_HOSTS.has(url.hostname) && (isChat || isCodexTask);
     } catch {
       return false;
     }
@@ -75,7 +77,7 @@
     dock.setAttribute("aria-label", "지피 질문 도구");
     dock.innerHTML = `
       <button type="button" data-gipi-action="copy" aria-label="현재 문단 질문 초안 복사">질문 복사</button>
-      <button type="button" data-gipi-action="open" aria-label="연결한 ChatGPT 세션 열기">세션 열기 ↗</button>
+      <button type="button" data-gipi-action="open" aria-label="연결한 ChatGPT 또는 Codex 세션 열기">세션 열기 ↗</button>
     `;
 
     const dialog = document.createElement("dialog");
@@ -87,9 +89,9 @@
           <div><span>PRIVATE SETTING</span><h2>지피 세션 연결</h2></div>
           <button value="cancel" aria-label="닫기">×</button>
         </div>
-        <p>현재 ChatGPT 대화의 주소를 붙여 넣으세요. 이 주소는 이 브라우저에만 저장되고 GitHub에는 올라가지 않아요.</p>
-        <label>ChatGPT 대화 주소<input type="url" inputmode="url" placeholder="https://chatgpt.com/c/..." autocomplete="off"></label>
-        <p class="gipi-dialog__error" role="alert" hidden>ChatGPT의 대화 주소를 확인해 주세요.</p>
+        <p>현재 ChatGPT 대화나 Codex 작업의 주소를 붙여 넣으세요. 이 주소는 이 브라우저에만 저장되고 GitHub에는 올라가지 않아요.</p>
+        <label>ChatGPT/Codex 주소<input type="url" inputmode="url" placeholder="https://chatgpt.com/codex/tasks/..." autocomplete="off"></label>
+        <p class="gipi-dialog__error" role="alert" hidden>ChatGPT 대화 또는 Codex 작업 주소를 확인해 주세요.</p>
         <div class="gipi-dialog__actions">
           <button type="button" data-dialog-action="clear">연결 해제</button>
           <button type="button" class="primary" data-dialog-action="save">이 기기에 저장</button>
